@@ -5,6 +5,8 @@ import EventEdit from '@/views/event/Edit.vue'
 import EventLayout from '@/views/event/Layout.vue'
 import AboutView from '@/views/AboutView.vue'
 import EventListView from '../views/EventListView.vue'
+import NotFound from '@/views/NotFound.vue'
+import NetworkError from '@/views/NetworkError.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +53,22 @@ const router = createRouter({
       redirect: (to) => {
         return { path: '/events/' + to.params.afterEvent }
       },
+    },
+    {
+      path: '/:catchAll(.*)',
+      name: 'not-found',
+      component: NotFound,
+    },
+    {
+      path: '/404/:resource',
+      name: '404Resource',
+      component: NotFound,
+      props: true,
+    },
+    {
+      path: '/network-error',
+      name: 'network-error',
+      component: NetworkError,
     },
   ],
 })
